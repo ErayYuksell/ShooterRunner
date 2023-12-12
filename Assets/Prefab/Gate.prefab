@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3482145078491392020}
   - component: {fileID: 859050684641360918}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: Glass
+  m_TagString: GateGlass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,6 +235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971bcaac7ad31a842b78c6da46b89ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gateType: 0
+  GateText: {fileID: 6996784442702262572}
+  currentValue: -2
+  glassGO: {fileID: 1045403563425286930}
+  materials:
+  - {fileID: 2100000, guid: db73b67685497ee4d9553c18d6baa824, type: 2}
+  - {fileID: 2100000, guid: f60f368793ad57749a56e32321910f93, type: 2}
 --- !u!1 &3062350836648738860
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '+2 '
+  m_text: +2 Fire
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -327,8 +334,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
