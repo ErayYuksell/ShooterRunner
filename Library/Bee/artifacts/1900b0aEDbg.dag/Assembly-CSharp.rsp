@@ -362,6 +362,7 @@
 "Assets/Script/BulletControl.cs"
 "Assets/Script/GateController.cs"
 "Assets/Script/PlayerController.cs"
+"Assets/Script/TargetController.cs"
 -langversion:9.0
 
 /deterministic
