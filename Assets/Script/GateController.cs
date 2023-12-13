@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum GateType { Power, Range, FireRate}
 public class GateController : MonoBehaviour
 {
-    public enum GateType { Power, Range, FireRate, Count }
+   
     public GateType gateType;
     [SerializeField] TextMeshProUGUI GateText;
-    [SerializeField] int currentValue;
+    [SerializeField] float currentValue;
     [SerializeField] GameObject glassGO;
     Renderer glassRenderer;
     [SerializeField] Material[] materials;
     bool isPassed = true;
+    GameObject playerObject;
+    PlayerController playerScript;
 
     private void Start()
     {
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerScript = playerObject.GetComponent<PlayerController>();
         glassRenderer = glassGO.GetComponent<Renderer>();
-        GateStart();
+        GateValue();
         GateCheck();
     }
-    void GateStart()
+    void GateValue()
     {
         switch (gateType)
         {
@@ -53,7 +58,7 @@ public class GateController : MonoBehaviour
         if (other.CompareTag("Player") && isPassed == true)
         {
             isPassed = false;
-            Debug.Log("Gate Passed");
+            playerScript.GatePassed(gateType, currentValue);
         }
     }
 }

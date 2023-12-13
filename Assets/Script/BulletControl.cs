@@ -6,6 +6,7 @@ public class BulletControl : MonoBehaviour
 {
     [SerializeField] float bulletSpeed;
     Rigidbody bulletRigidBody;
+    [SerializeField] Transform bulletSpawnPosition;
 
     private void Start()
     {
@@ -15,9 +16,29 @@ public class BulletControl : MonoBehaviour
     private void Update()
     {
         BulletMovement();
+
+        CalculateDistance();
     }
     void BulletMovement()
     {
         bulletRigidBody.velocity = Vector3.forward * bulletSpeed * Time.deltaTime;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Gate"))
+        {
+
+            Debug.Log("MermiDet");
+        }
+    }
+    void CalculateDistance() // ?????
+    {
+       
+            float distance = Vector3.Distance(transform.position, bulletSpawnPosition.position);
+            if (distance > 15)
+            {
+                gameObject.SetActive(false);
+            }
+        
     }
 }

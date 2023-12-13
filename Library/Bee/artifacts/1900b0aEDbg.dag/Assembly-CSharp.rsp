@@ -361,6 +361,7 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.6f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Script/BulletControl.cs"
 "Assets/Script/GateController.cs"
+"Assets/Script/ObjectPool.cs"
 "Assets/Script/PlayerController.cs"
 "Assets/Script/TargetController.cs"
 -langversion:9.0

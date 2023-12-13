@@ -218,6 +218,16 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!1 &440638821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6954560478694130368, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
+  m_PrefabInstance: {fileID: 5587254253249301424}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &440638822 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3865520243499688485, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
+  m_PrefabInstance: {fileID: 5587254253249301424}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &441843782
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +385,10 @@ PrefabInstance:
     - target: {fileID: 2962667819931635544, guid: c98a550e028a0354296183130cbe08ce, type: 3}
       propertyPath: m_Name
       value: Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
+      propertyPath: gateType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
       propertyPath: currentValue
@@ -659,6 +673,10 @@ PrefabInstance:
     - target: {fileID: 2962667819931635544, guid: c98a550e028a0354296183130cbe08ce, type: 3}
       propertyPath: m_Name
       value: Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
+      propertyPath: gateType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
       propertyPath: currentValue
@@ -1214,6 +1232,10 @@ PrefabInstance:
       value: Gate (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
+      propertyPath: gateType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866629934645037650, guid: c98a550e028a0354296183130cbe08ce, type: 3}
       propertyPath: currentValue
       value: -5
       objectReference: {fileID: 0}
@@ -1473,6 +1495,53 @@ Transform:
   - {fileID: 1447316041}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1439875707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439875708}
+  - component: {fileID: 1439875709}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439875708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439875707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9229543, y: 1.1151719, z: 8.900212}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1439875709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439875707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fe3a67af739b4d428e2372b638fae5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 6754568178419011858, guid: 0fe3e838475d14243b969fe99f0b5633, type: 3}
+  poolSize: 20
+  bulletPoint: {fileID: 440638822}
 --- !u!4 &1447316041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 105674422062328796, guid: c98a550e028a0354296183130cbe08ce, type: 3}
@@ -2219,6 +2288,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8358573358684181873, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
+      propertyPath: objectPool
+      value: 
+      objectReference: {fileID: 1439875709}
+    - target: {fileID: 8358573358684181873, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
+      propertyPath: bulletDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358573358684181873, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
+      propertyPath: bulletSpawnPoint
+      value: 
+      objectReference: {fileID: 440638821}
     - target: {fileID: 8436524387109579245, guid: d4aa85c33f1156c4ca6b65f8fb23fba9, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2240,3 +2321,4 @@ SceneRoots:
   - {fileID: 1483621760}
   - {fileID: 925410132552940431}
   - {fileID: 699356403}
+  - {fileID: 1439875708}
