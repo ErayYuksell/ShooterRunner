@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 8147943089832916263}
   - component: {fileID: 5595769963169983406}
   - component: {fileID: 3866629934645037650}
+  - component: {fileID: 5533382637036596216}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Gate
@@ -257,13 +258,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 971bcaac7ad31a842b78c6da46b89ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateType: 0
+  gateType: 2
   GateText: {fileID: 6996784442702262572}
-  currentValue: -2
+  currentValue: -5
   glassGO: {fileID: 1045403563425286930}
   materials:
   - {fileID: 2100000, guid: db73b67685497ee4d9553c18d6baa824, type: 2}
   - {fileID: 2100000, guid: f60f368793ad57749a56e32321910f93, type: 2}
+--- !u!95 &5533382637036596216
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962667819931635544}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57279096083041a4996e30ed947b99eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3062350836648738860
 GameObject:
   m_ObjectHideFlags: 0

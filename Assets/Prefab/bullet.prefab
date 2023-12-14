@@ -181,4 +181,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 3000
-  bulletSpawnPoint: {fileID: 0}
+  bulletDistance: 15

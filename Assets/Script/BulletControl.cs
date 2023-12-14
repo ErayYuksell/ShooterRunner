@@ -6,11 +6,18 @@ public class BulletControl : MonoBehaviour
 {
     [SerializeField] float bulletSpeed;
     Rigidbody bulletRigidBody;
-    [SerializeField] Transform bulletSpawnPosition;
-
+    GameObject playerObject;
+    PlayerController playerControllerScript;
+    GameObject BulletSpawnPoint;
+    float bulletRange;
+    //float bulletDistance = 15;
+    /*public float BulletDistance => bulletDistance;*/ // bullet distance kullanabilirsin ama deger atamasi yapamassin 
     private void Start()
     {
         bulletRigidBody = GetComponent<Rigidbody>();
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerControllerScript = playerObject.GetComponent<PlayerController>();
+        BulletSpawnPoint = playerControllerScript.fireModule.bulletSpawnPoint;
     }
 
     private void Update()
@@ -27,18 +34,22 @@ public class BulletControl : MonoBehaviour
     {
         if (other.CompareTag("Gate"))
         {
-
-            Debug.Log("MermiDet");
+            //var gate = other.GetComponent<GateController>();
+            //gate.PlayHitAnim();
+            //Debug.Log("MermiDet");
         }
     }
     void CalculateDistance() // ?????
     {
-       
-            float distance = Vector3.Distance(transform.position, bulletSpawnPosition.position);
-            if (distance > 15)
-            {
-                gameObject.SetActive(false);
-            }
-        
+
+        float distance = Vector3.Distance(transform.position, BulletSpawnPoint.transform.position);
+        bulletRange = playerControllerScript.fireModule.GetBulletDistance();
+        if (distance > bulletRange)
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+
+
 }

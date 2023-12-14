@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum GateType { Power, Range, FireRate}
+public enum GateType { Power, Range, FireRate }
 public class GateController : MonoBehaviour
 {
-   
+
     public GateType gateType;
     [SerializeField] TextMeshProUGUI GateText;
     [SerializeField] float currentValue;
@@ -16,9 +16,12 @@ public class GateController : MonoBehaviour
     bool isPassed = true;
     GameObject playerObject;
     PlayerController playerScript;
+    //public Animator animator;
+    //public AnimationClip hitAnim;
 
     private void Start()
     {
+
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerScript = playerObject.GetComponent<PlayerController>();
         glassRenderer = glassGO.GetComponent<Renderer>();
@@ -58,7 +61,11 @@ public class GateController : MonoBehaviour
         if (other.CompareTag("Player") && isPassed == true)
         {
             isPassed = false;
-            playerScript.GatePassed(gateType, currentValue);
+            playerScript.gatePassModule.GatePassed(gateType, currentValue);
         }
     }
+    //public void PlayHitAnim()
+    //{
+    //    animator.Play(hitAnim.name);
+    //}
 }

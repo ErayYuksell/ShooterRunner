@@ -2239,8 +2239,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 6754568178419011858, guid: 0fe3e838475d14243b969fe99f0b5633, type: 3}
-  bulletPoint: {fileID: 6954560478694130368}
-  bulletDuration: 0.03
+  bulletDuration: 0.1
+  bulletDistance: 15
+  movementModule:
+    playerSpeed: 5
+  fireModule:
+    bulletSpawnPoint: {fileID: 6954560478694130368}
+    objectPool: {fileID: 0}
+  gatePassModule:
+    fireRateMultiply: 0.01
+    rangeMultiply: 0.01
+    powerMultiply: 0.01
 --- !u!54 &464012475163351445
 Rigidbody:
   m_ObjectHideFlags: 0

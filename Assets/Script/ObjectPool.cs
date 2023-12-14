@@ -67,13 +67,38 @@ public class ObjectPool : MonoBehaviour
             poolObjects.Enqueue(obj); // siraya ekle 
         }
     }
-    public GameObject GetPoolObject()
+    //public GameObject GetPoolObject()
+    //{
+
+    //    GameObject obj = poolObjects.Dequeue(); // sirali sekilde en bastan objeler geliyor 
+    //    obj.SetActive(true);
+
+    //    poolObjects.Enqueue(obj); // siranin sonuna geri ekledik 
+
+    //    return obj;
+    //}
+    public GameObject NewGetPoolObject() // belirledigim range ve sureye uymasi icin gerekli olursa yeni bir obje kendi kendine ekleyecek 
     {
-        GameObject obj = poolObjects.Dequeue(); // sirali sekilde en bastan objeler geliyor 
-        obj.SetActive(true);
+        foreach (GameObject obj in poolObjects)
+        {
+            if (!obj.activeSelf)
+            {
+                obj.SetActive(true);
+                poolObjects.Enqueue(obj);
+                return obj;
+            }
+        }
+        Quaternion rotation = Quaternion.Euler(90, transform.rotation.y, transform.rotation.z);
+        GameObject newBullet = Instantiate(objectPrefab, bulletPoint.position, rotation, transform);
 
-        poolObjects.Enqueue(obj); // siranin sonuna geri ekledik 
+        newBullet.SetActive(false);
+        
+        poolObjects.Enqueue(newBullet); // siraya ekle 
 
-        return obj;
+
+        return newBullet;
     }
+
+    // objeleri sirayla acarken range kadar ilerliyorsa elleme ama range kadar gidemiyorsa yeni objeler olusturup siraya ekle 
+
 }
