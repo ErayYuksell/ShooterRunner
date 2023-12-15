@@ -16,8 +16,7 @@ public class GateController : MonoBehaviour
     bool isPassed = true;
     GameObject playerObject;
     PlayerController playerScript;
-    //public Animator animator;
-    //public AnimationClip hitAnim;
+   
 
     private void Start()
     {
@@ -64,8 +63,5 @@ public class GateController : MonoBehaviour
             playerScript.gatePassModule.GatePassed(gateType, currentValue);
         }
     }
-    //public void PlayHitAnim()
-    //{
-    //    animator.Play(hitAnim.name);
-    //}
+   
 }

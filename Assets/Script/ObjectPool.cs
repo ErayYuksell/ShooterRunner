@@ -93,7 +93,7 @@ public class ObjectPool : MonoBehaviour
 
         newBullet.SetActive(false);
         
-        poolObjects.Enqueue(newBullet); // siraya ekle 
+        poolObjects.Enqueue(newBullet); // siranin sonuna ekle 
 
 
         return newBullet;

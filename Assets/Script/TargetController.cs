@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class TargetController : MonoBehaviour
 {
-    [SerializeField] int targetValue = 20;
+    [SerializeField] float targetValue = 20;
     [SerializeField] TextMeshProUGUI targetText;
     [SerializeField] Animator animator;
     [SerializeField] AnimationClip clip;
+    GameObject playerObject;
+    PlayerController playerControllerScript;
     void Start()
     {
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerControllerScript = playerObject.GetComponent<PlayerController>();
         targetText.text = targetValue.ToString();
     }
 
@@ -19,15 +23,27 @@ public class TargetController : MonoBehaviour
     {
 
     }
-    public void DecraeseValue()
+    public void DecraeseValue(float bulletPower)
     {
-        HitAnim();
-        targetValue--;
+        //animator.SetBool("isShoot", true);
+        targetValue -= bulletPower;
+        if (targetValue <= 0)
+        {
+            targetValue = 0;
+            gameObject.SetActive(false);
+        }
         targetText.text = targetValue.ToString();
     }
     public void HitAnim()
     {
         animator.Play(clip.name);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerControllerScript.deathModule.PlayerDeath();
+        }
     }
 
 }

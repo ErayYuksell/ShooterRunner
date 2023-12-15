@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     public MovementModule movementModule;
     public FireModule fireModule;
     public GatePassModule gatePassModule;
+    public DeathModule deathModule;
+    bool isAlive = true;
 
     void Start()
     {
         movementModule.init(this);
         fireModule.init(this);
         gatePassModule.init(this);
+        deathModule.init(this);
 
         bulletControlScript = bulletObject.GetComponent<BulletControl>();
         StartCoroutine(fireModule.BulletFire());
@@ -42,6 +45,10 @@ public class PlayerController : MonoBehaviour
         }
         public void PlayerMovement()
         {
+            if (!playerController.isAlive)
+            {
+                return;
+            }
             float touchX = 0;
             float newXValue;
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -69,13 +76,14 @@ public class PlayerController : MonoBehaviour
         [SerializeField] ObjectPool objectPool = null;
         public float bulletDuration = 0.5f;
         public float bulletDistance = 15;
+        public float bulletPower = 1f;
         public void init(PlayerController playerController)
         {
             this.playerController = playerController;
         }
         public IEnumerator BulletFire()
         {
-            while (true)
+            while (playerController.isAlive)
             {
                 var obj = objectPool.NewGetPoolObject();
 
@@ -87,6 +95,10 @@ public class PlayerController : MonoBehaviour
         public float GetBulletDistance()
         {
             return bulletDistance;
+        }
+        public float GetBulletPower()
+        {
+            return bulletPower;
         }
     }
     [Serializable]
@@ -108,7 +120,7 @@ public class PlayerController : MonoBehaviour
             switch (gateType)
             {
                 case GateType.Power:
-
+                    playerController.fireModule.bulletPower += currentValue * powerMultiply;
                     break;
                 case GateType.Range:
                     playerController.fireModule.bulletDistance += currentValue * rangeMultiply;
@@ -121,8 +133,30 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    [Serializable]
+    public class DeathModule
+    {
+        PlayerController playerController;
+        public void init(PlayerController playerController)
+        {
+            this.playerController = playerController;
+        }
+
+        public void PlayerDeath()
+        {
+            playerController.isAlive = false;
+        }
+    }
 
 
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("FinishLine"))
+        {
+            LevelController.Instance.NextLevel();
+        }
+    }
+
+
 }
