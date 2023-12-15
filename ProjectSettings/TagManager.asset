@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GateGlass
   - Gate
+  - Target
   layers:
   - Default
   - TransparentFX

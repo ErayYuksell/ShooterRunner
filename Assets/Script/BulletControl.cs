@@ -10,7 +10,9 @@ public class BulletControl : MonoBehaviour
     PlayerController playerControllerScript;
     GameObject BulletSpawnPoint;
     float bulletRange;
-    //float bulletDistance = 15;
+    GameObject targetobject;
+    TargetController targetController;
+    
     /*public float BulletDistance => bulletDistance;*/ // bullet distance kullanabilirsin ama deger atamasi yapamassin 
     private void Start()
     {
@@ -18,6 +20,8 @@ public class BulletControl : MonoBehaviour
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerControllerScript = playerObject.GetComponent<PlayerController>();
         BulletSpawnPoint = playerControllerScript.fireModule.bulletSpawnPoint;
+        targetobject = GameObject.FindGameObjectWithTag("Target");
+        targetController = targetobject.GetComponent<TargetController>();
     }
 
     private void Update()
@@ -32,11 +36,13 @@ public class BulletControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Gate"))
+        if (other.CompareTag("Target"))
         {
             //var gate = other.GetComponent<GateController>();
             //gate.PlayHitAnim();
             //Debug.Log("MermiDet");
+            gameObject.SetActive(false);
+            targetController.DecraeseValue();
         }
     }
     void CalculateDistance() // ?????

@@ -53,7 +53,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] Transform bulletPoint;
 
 
-    private void Awake()
+    private void Awake() // normal object pool alttaki son yorum satirina kadar 
     {
 
         poolObjects = new Queue<GameObject>();
