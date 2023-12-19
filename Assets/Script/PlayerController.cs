@@ -9,12 +9,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] GameObject bulletObject;
 
-    BulletControl bulletControlScript;
+    Animator animator;
+    [SerializeField] LevelController levelController;
     public MovementModule movementModule;
     public FireModule fireModule;
     public GatePassModule gatePassModule;
     public DeathModule deathModule;
-    bool isAlive = true;
+    bool isAlive = false;
 
     void Start()
     {
@@ -23,8 +24,9 @@ public class PlayerController : MonoBehaviour
         gatePassModule.init(this);
         deathModule.init(this);
 
-        bulletControlScript = bulletObject.GetComponent<BulletControl>();
-        StartCoroutine(fireModule.BulletFire());
+        animator = GetComponent<Animator>();
+
+
     }
 
 
@@ -32,6 +34,13 @@ public class PlayerController : MonoBehaviour
     {
         movementModule.PlayerMovement();
     }
+
+    public void StartCoroutine()
+    {
+        StartCoroutine(fireModule.BulletFire());
+    }
+
+
     [Serializable]
     public class MovementModule
     {
@@ -66,6 +75,20 @@ public class PlayerController : MonoBehaviour
             Vector3 playerNewPosition = new Vector3(newXValue, playerController.transform.position.y, playerController.transform.position.z + playerSpeed * Time.deltaTime);
             playerController.transform.position = playerNewPosition;
 
+        }
+        public void StartRunAnime()
+        {
+            playerController.animator.SetBool("IsRun", true);
+        }
+        public void StopRunAnime()
+        {
+            playerController.animator.SetBool("IsRun", false);
+        }
+        public void StartGame()
+        {
+            playerController.isAlive = true;
+            StartRunAnime();
+            playerController.StartCoroutine();
         }
     }
     [Serializable]
@@ -145,6 +168,8 @@ public class PlayerController : MonoBehaviour
         public void PlayerDeath()
         {
             playerController.isAlive = false;
+            playerController.animator.SetTrigger("IsDead");
+            playerController.levelController.LoadLevel();
         }
     }
 

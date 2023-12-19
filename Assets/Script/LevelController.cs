@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     public static LevelController Instance;
-    int currentLevel = 0;
-    int maxLevel;
+    int currentLevel;
+    int maxLevel = 5;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -18,17 +18,37 @@ public class LevelController : MonoBehaviour
         {
             Instance = this;
         }
+        //LoadLevel();
     }
-    public void GetLevel()
+
+    private void Start()
     {
-        currentLevel = PlayerPrefs.GetInt("CurrenLevel", 0);
+
     }
+
     public void LoadLevel()
     {
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
         SceneManager.LoadScene(currentLevel);
     }
+
+    //public void GetLevel()
+    //{
+    //    SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel", 0));
+    //}
+    //public void LoadLevel()
+    //{
+    //    StartCoroutine(WaitLoadLevel());
+    //}
+    //public IEnumerator WaitLoadLevel()
+    //{
+    //    yield return new WaitForSeconds(3f);
+    //    SceneManager.LoadScene(currentLevel);
+    //}
+
     public void NextLevel()
     {
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel");
         currentLevel++;
         if (currentLevel > maxLevel)
         {
@@ -36,10 +56,6 @@ public class LevelController : MonoBehaviour
         }
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
         LoadLevel();
-
     }
-    void Update()
-    {
 
-    }
 }
