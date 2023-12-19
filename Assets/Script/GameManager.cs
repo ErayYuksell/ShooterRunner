@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        playerController.movementModule.SetCanMove(true);
         playerController.movementModule.StartGame();
         startPanel.SetActive(false);
     }

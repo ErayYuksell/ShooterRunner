@@ -16,14 +16,25 @@ public class GateController : MonoBehaviour
     bool isPassed = true;
     [SerializeField] Animator animator;
     [SerializeField] AnimationClip gateAnim;
-
+    GameObject[] gates;
+    List<GameObject> gateObjects = new List<GameObject>();
 
 
     private void Start()
     {
+        ArrayToList();
+
         glassRenderer = glassGO.GetComponent<Renderer>();
         GateValue();
         GateCheck();
+    }
+    void ArrayToList()
+    {
+        gates = GameObject.FindGameObjectsWithTag("Gate");
+        foreach (GameObject go in gates)
+        {
+            gateObjects.Add(go);
+        }
     }
 
     void GateValue()
@@ -59,10 +70,35 @@ public class GateController : MonoBehaviour
         if (other.CompareTag("Player") && isPassed == true)
         {
             isPassed = false;
+
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            gateObjects.Remove(gameObject);
+            StartCoroutine(GateColliderClose());
+            
             var player = other.GetComponent<PlayerController>();
             player.gatePassModule.GatePassed(gateType, currentValue);
+
+            animator.SetTrigger("IsDead");
         }
     }
+    IEnumerator  GateColliderClose()
+    {
+
+        // bir gate degdikten sonra tum gatelerin colliderlarini kapatariz belli bir sure sonra geri acariz boylece 2 gate den gecemez 
+
+        foreach (GameObject gate in gateObjects)
+        {
+            gate.GetComponent<Collider>().enabled = false;
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        foreach (GameObject gate in gateObjects)
+        {
+            gate.GetComponent<Collider>().enabled = true;
+        }
+    }
+    
     public void GateIncreaseValue(float value)
     {
         currentValue += value;

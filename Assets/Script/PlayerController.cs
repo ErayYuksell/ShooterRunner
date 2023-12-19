@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
 
@@ -25,8 +25,6 @@ public class PlayerController : MonoBehaviour
         deathModule.init(this);
 
         animator = GetComponent<Animator>();
-
-
     }
 
 
@@ -39,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         StartCoroutine(fireModule.BulletFire());
     }
-
+  
 
     [Serializable]
     public class MovementModule
@@ -48,13 +46,18 @@ public class PlayerController : MonoBehaviour
         float xSpeed;
         float maxXValue = 4.60f;
         [SerializeField] float playerSpeed = 5;
+        bool canMove = false;
         public void init(PlayerController playerController)
         {
             this.playerController = playerController;
         }
+        public void SetCanMove(bool input)
+        {
+            canMove = input;
+        }
         public void PlayerMovement()
         {
-            if (!playerController.isAlive)
+            if (!playerController.isAlive && !canMove)
             {
                 return;
             }
@@ -100,19 +103,27 @@ public class PlayerController : MonoBehaviour
         public float bulletDuration = 0.5f;
         public float bulletDistance = 15;
         public float bulletPower = 1f;
+        bool canFire = true;
         public void init(PlayerController playerController)
         {
             this.playerController = playerController;
         }
+        public void SetCanFire(bool input)
+        {
+            canFire = input;
+        }
         public IEnumerator BulletFire()
         {
-            while (playerController.isAlive)
+            if (canFire)
             {
-                var obj = objectPool.NewGetPoolObject();
+                while (playerController.isAlive)
+                {
+                    var obj = objectPool.NewGetPoolObject();
 
-                obj.transform.position = bulletSpawnPoint.transform.position;
+                    obj.transform.position = bulletSpawnPoint.transform.position;
 
-                yield return new WaitForSeconds(bulletDuration);
+                    yield return new WaitForSeconds(bulletDuration);
+                }
             }
         }
         public float GetBulletDistance()
@@ -139,7 +150,6 @@ public class PlayerController : MonoBehaviour
 
         public void GatePassed(GateType gateType, float currentValue)
         {
-
             switch (gateType)
             {
                 case GateType.Power:
@@ -167,9 +177,19 @@ public class PlayerController : MonoBehaviour
 
         public void PlayerDeath()
         {
-            playerController.isAlive = false;
-            playerController.animator.SetTrigger("IsDead");
-            playerController.levelController.LoadLevel();
+            //playerController.isAlive = false;
+            //playerController.animator.SetTrigger("IsDead");
+
+        }
+        public void PlayerBounce()
+        {
+            playerController.movementModule.SetCanMove(false);
+            playerController.fireModule.SetCanFire(false); // bir bokuma yaramadi hala ates ediyor 
+            playerController.transform.DOMove(playerController.transform.position - new Vector3(0, 0, 4), 0.5f).OnComplete(() =>
+            {
+                playerController.movementModule.SetCanMove(true);
+                playerController.fireModule.SetCanFire(true);
+            });
         }
     }
 

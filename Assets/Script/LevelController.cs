@@ -30,20 +30,6 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene(currentLevel);
     }
 
-    //public void GetLevel()
-    //{
-    //    SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel", 0));
-    //}
-    //public void LoadLevel()
-    //{
-    //    StartCoroutine(WaitLoadLevel());
-    //}
-    //public IEnumerator WaitLoadLevel()
-    //{
-    //    yield return new WaitForSeconds(3f);
-    //    SceneManager.LoadScene(currentLevel);
-    //}
-
     public void NextLevel()
     {
         currentLevel = PlayerPrefs.GetInt("CurrentLevel");

@@ -39,7 +39,7 @@ public class TargetController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var player = other.GetComponent<PlayerController>();
-            player.deathModule.PlayerDeath();
+            player.deathModule.PlayerBounce();
         }
     }
 
