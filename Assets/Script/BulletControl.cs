@@ -34,16 +34,23 @@ public class BulletControl : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Target"))
+        if (other.CompareTag("Target")) // trigger ici haric baska bir scripti kullanman gereken yer oldugunda sikinti var 
         {
             gameObject.SetActive(false);
             var bulletPower = playerControllerScript.fireModule.GetBulletPower();
-            other.GetComponent<TargetController>().DecraeseValue(bulletPower);
+            var target = other.GetComponent<TargetController>();
+            target.DecraeseValue(bulletPower);
+            target.HitAnim();
+        }
+        if (other.CompareTag("Gate"))
+        {
+            var gate = other.GetComponent<GateController>();
+            gate.GateIncreaseValue(playerControllerScript.fireModule.bulletPower);
+            gate.GateHitAnim();
         }
     }
-    void CalculateDistance() // ?????
+    void CalculateDistance() 
     {
-
         float distance = Vector3.Distance(transform.position, BulletSpawnPoint.transform.position);
         bulletRange = playerControllerScript.fireModule.GetBulletDistance();
         if (distance > bulletRange)

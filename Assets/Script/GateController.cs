@@ -14,31 +14,30 @@ public class GateController : MonoBehaviour
     Renderer glassRenderer;
     [SerializeField] Material[] materials;
     bool isPassed = true;
-    GameObject playerObject;
-    PlayerController playerScript;
-   
+    [SerializeField] Animator animator;
+    [SerializeField] AnimationClip gateAnim;
+
+
 
     private void Start()
     {
-
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        playerScript = playerObject.GetComponent<PlayerController>();
         glassRenderer = glassGO.GetComponent<Renderer>();
         GateValue();
         GateCheck();
     }
+
     void GateValue()
     {
         switch (gateType)
         {
             case GateType.Power:
-                GateText.text = currentValue.ToString();
+                GateText.text = currentValue.ToString("F0");
                 break;
             case GateType.Range:
-                GateText.text = currentValue.ToString();
+                GateText.text = currentValue.ToString("F0");
                 break;
             case GateType.FireRate:
-                GateText.text = currentValue.ToString();
+                GateText.text = currentValue.ToString("F0");
                 break;
             default:
                 break;
@@ -60,8 +59,19 @@ public class GateController : MonoBehaviour
         if (other.CompareTag("Player") && isPassed == true)
         {
             isPassed = false;
-            playerScript.gatePassModule.GatePassed(gateType, currentValue);
+            var player = other.GetComponent<PlayerController>();
+            player.gatePassModule.GatePassed(gateType, currentValue);
         }
     }
-   
+    public void GateIncreaseValue(float value)
+    {
+        currentValue += value;
+        GateValue();
+        GateCheck();
+    }
+    public void GateHitAnim()
+    {
+        animator.Play(gateAnim.name);
+    }
+
 }

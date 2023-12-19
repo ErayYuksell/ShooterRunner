@@ -9,30 +9,26 @@ public class TargetController : MonoBehaviour
     [SerializeField] TextMeshProUGUI targetText;
     [SerializeField] Animator animator;
     [SerializeField] AnimationClip clip;
-    GameObject playerObject;
-    PlayerController playerControllerScript;
+
     void Start()
     {
-        playerObject = GameObject.FindGameObjectWithTag("Player");
-        playerControllerScript = playerObject.GetComponent<PlayerController>();
         targetText.text = targetValue.ToString();
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
 
     }
     public void DecraeseValue(float bulletPower)
     {
-        //animator.SetBool("isShoot", true);
         targetValue -= bulletPower;
         if (targetValue <= 0)
         {
             targetValue = 0;
             gameObject.SetActive(false);
         }
-        targetText.text = targetValue.ToString();
+        targetText.text = targetValue.ToString("F0");
     }
     public void HitAnim()
     {
@@ -42,7 +38,8 @@ public class TargetController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerControllerScript.deathModule.PlayerDeath();
+            var player = other.GetComponent<PlayerController>();
+            player.deathModule.PlayerDeath();
         }
     }
 

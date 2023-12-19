@@ -10,22 +10,20 @@ public class LevelController : MonoBehaviour
     int maxLevel = 5;
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
         {
-            Destroy(this);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Instance = this;
+            Destroy(gameObject);
         }
-        //LoadLevel();
     }
-
     private void Start()
     {
-
+        LoadLevel();
     }
-
     public void LoadLevel()
     {
         currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
