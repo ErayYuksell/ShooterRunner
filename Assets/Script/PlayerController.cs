@@ -191,6 +191,10 @@ public class PlayerController : MonoBehaviour
                 playerController.fireModule.SetCanFire(true);
             });
         }
+        public void PlayerDamage()
+        {
+            playerController.fireModule.bulletDuration += 0.05f;
+        }
     }
 
 

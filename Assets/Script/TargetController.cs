@@ -40,6 +40,7 @@ public class TargetController : MonoBehaviour
         {
             var player = other.GetComponent<PlayerController>();
             player.deathModule.PlayerBounce();
+            player.deathModule.PlayerDamage();
         }
     }
 
