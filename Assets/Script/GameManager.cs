@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject startPanel;
     GameObject playerObject;
     PlayerController playerController;
+    [SerializeField] GameObject successPanel;
+    [SerializeField] GameObject failPanel;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,6 +32,24 @@ public class GameManager : MonoBehaviour
         playerController.movementModule.SetCanMove(true);
         playerController.movementModule.StartGame();
         startPanel.SetActive(false);
+    }
+    public void SuccessFinishGame()
+    {
+        successPanel.SetActive(false);
+        LevelController.Instance.NextLevel();
+    }
+    public void FailFinishGame()
+    {
+        failPanel.SetActive(false);
+        LevelController.Instance.LoadLevel();
+    }
+    public void SuccessPanelActive()
+    {
+        successPanel.SetActive(true);
+    }
+    public void FailurePanelActive()
+    {
+        failPanel.SetActive(true);
     }
 
     void Update()

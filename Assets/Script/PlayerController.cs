@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public FireModule fireModule;
     public GatePassModule gatePassModule;
     public DeathModule deathModule;
+    public FinishGame finishGame;
     bool isAlive = false;
 
     void Start()
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
         fireModule.init(this);
         gatePassModule.init(this);
         deathModule.init(this);
+        finishGame.init(this);
 
         animator = GetComponent<Animator>();
     }
@@ -31,13 +35,32 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movementModule.PlayerMovement();
+        SpeedUp();
     }
 
     public void StartCoroutine()
     {
         StartCoroutine(fireModule.BulletFire());
     }
-  
+    public void StartBombCoroutine()
+    {
+        StartCoroutine(finishGame.PlayerShoot());
+    }
+    public void SpeedUp() // oyunu hizlandirip yavaslatmak icin yazdim
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Time.timeScale = 4f;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Time.timeScale = 0f;
+        }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
     [Serializable]
     public class MovementModule
@@ -57,7 +80,7 @@ public class PlayerController : MonoBehaviour
         }
         public void PlayerMovement()
         {
-            if (!playerController.isAlive && !canMove)
+            if (!canMove)
             {
                 return;
             }
@@ -89,7 +112,7 @@ public class PlayerController : MonoBehaviour
         }
         public void StartGame()
         {
-            playerController.isAlive = true;
+            //playerController.isAlive = true;
             StartRunAnime();
             playerController.StartCoroutine();
         }
@@ -114,16 +137,13 @@ public class PlayerController : MonoBehaviour
         }
         public IEnumerator BulletFire()
         {
-            if (canFire)
+            while (canFire)
             {
-                while (playerController.isAlive)
-                {
-                    var obj = objectPool.NewGetPoolObject();
+                var obj = objectPool.NewGetPoolObject();
 
-                    obj.transform.position = bulletSpawnPoint.transform.position;
+                obj.transform.position = bulletSpawnPoint.transform.position;
 
-                    yield return new WaitForSeconds(bulletDuration);
-                }
+                yield return new WaitForSeconds(bulletDuration);
             }
         }
         public float GetBulletDistance()
@@ -170,6 +190,8 @@ public class PlayerController : MonoBehaviour
     public class DeathModule
     {
         PlayerController playerController;
+        [SerializeField] TextMeshProUGUI playerText;
+        float textValue;
         public void init(PlayerController playerController)
         {
             this.playerController = playerController;
@@ -184,26 +206,73 @@ public class PlayerController : MonoBehaviour
         public void PlayerBounce()
         {
             playerController.movementModule.SetCanMove(false);
-            playerController.fireModule.SetCanFire(false); // bir bokuma yaramadi hala ates ediyor 
+            playerController.fireModule.SetCanFire(false);
+
             playerController.transform.DOMove(playerController.transform.position - new Vector3(0, 0, 4), 0.5f).OnComplete(() =>
             {
                 playerController.movementModule.SetCanMove(true);
                 playerController.fireModule.SetCanFire(true);
+                playerController.StartCoroutine();
+
             });
         }
         public void PlayerDamage()
         {
             playerController.fireModule.bulletDuration += 0.05f;
         }
-    }
-
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("FinishLine"))
+        public void PlayerText(float value)
         {
-            LevelController.Instance.NextLevel();
+            textValue += value;
+            playerText.text = textValue.ToString("F0");
+        }
+        public float GetTextValue()
+        {
+            return textValue;
+        }
+    }
+    [Serializable]
+    public class FinishGame
+    {
+        PlayerController playerController;
+        [SerializeField] Transform playerStopPosition;
+        [SerializeField] Transform bombSpawnPoint;
+        [SerializeField] GameObject bombPrefab;
+        [SerializeField] int bombAmount;
+        public void init(PlayerController playerController)
+        {
+            this.playerController = playerController;
+        }
+        public void PlayerMove()
+        {
+            playerController.movementModule.SetCanMove(false);
+            playerController.movementModule.StopRunAnime();
+
+            playerController.fireModule.SetCanFire(false);
+
+            playerController.transform.DOMove(playerStopPosition.position, 2f).OnComplete(() =>
+            {
+                playerController.StartBombCoroutine(); // ???
+            });
+        }
+        public IEnumerator PlayerShoot()
+        {
+            bombAmount = (int)playerController.deathModule.GetTextValue() / 20;
+            if (bombAmount == 0)
+            {
+                GameManager.Instance.FailurePanelActive();
+            }
+            else
+            {
+                for (int i = 0; i < bombAmount; i++)
+                {
+                    Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
+                    Instantiate(bombPrefab, bombSpawnPoint.position, rotation);
+
+                    yield return new WaitForSeconds(2);
+                }
+                GameManager.Instance.SuccessPanelActive();
+            }
+
         }
     }
 

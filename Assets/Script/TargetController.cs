@@ -6,13 +6,20 @@ using UnityEngine;
 public class TargetController : MonoBehaviour
 {
     [SerializeField] float targetValue = 20;
+    float targetFirstValue;
     [SerializeField] TextMeshProUGUI targetText;
     [SerializeField] Animator animator;
     [SerializeField] AnimationClip clip;
 
+    GameObject playerObject;
+    PlayerController playerController;
+
     void Start()
     {
         targetText.text = targetValue.ToString();
+        targetFirstValue = targetValue;
+        playerObject = GameObject.FindGameObjectWithTag("Player");
+        playerController = playerObject.GetComponent<PlayerController>();
     }
 
    
@@ -27,6 +34,7 @@ public class TargetController : MonoBehaviour
         {
             targetValue = 0;
             gameObject.SetActive(false);
+            playerController.deathModule.PlayerText(targetFirstValue);
         }
         targetText.text = targetValue.ToString("F0");
     }
