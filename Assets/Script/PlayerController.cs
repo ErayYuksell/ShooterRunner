@@ -245,13 +245,13 @@ public class PlayerController : MonoBehaviour
         public void PlayerMove()
         {
             playerController.movementModule.SetCanMove(false);
-            playerController.movementModule.StopRunAnime();
-
             playerController.fireModule.SetCanFire(false);
 
             playerController.transform.DOMove(playerStopPosition.position, 2f).OnComplete(() =>
             {
+                playerController.movementModule.StopRunAnime();
                 playerController.StartBombCoroutine(); // ???
+                // image 2D nasi koycaz ???
             });
         }
         public IEnumerator PlayerShoot()
@@ -268,9 +268,9 @@ public class PlayerController : MonoBehaviour
                     Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
                     Instantiate(bombPrefab, bombSpawnPoint.position, rotation);
 
-                    yield return new WaitForSeconds(2);
+                    yield return new WaitForSeconds(1.5f);
                 }
-                GameManager.Instance.SuccessPanelActive();
+                GameManager.Instance.SuccessPanelActive(bombAmount);
             }
 
         }

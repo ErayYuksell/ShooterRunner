@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     GameObject playerObject;
     PlayerController playerController;
     [SerializeField] GameObject successPanel;
+    [SerializeField] TextMeshProUGUI successText;
     [SerializeField] GameObject failPanel;
     private void Awake()
     {
@@ -43,17 +45,14 @@ public class GameManager : MonoBehaviour
         failPanel.SetActive(false);
         LevelController.Instance.LoadLevel();
     }
-    public void SuccessPanelActive()
+    public void SuccessPanelActive(int value)
     {
         successPanel.SetActive(true);
+        successText.text = value.ToString() + "x";
     }
     public void FailurePanelActive()
     {
         failPanel.SetActive(true);
     }
 
-    void Update()
-    {
-
-    }
 }

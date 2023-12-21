@@ -364,6 +364,7 @@
 "Assets/Script/BombController.cs"
 "Assets/Script/BulletControl.cs"
 "Assets/Script/FinishController.cs"
+"Assets/Script/FInishWallController.cs"
 "Assets/Script/GameManager.cs"
 "Assets/Script/GateController.cs"
 "Assets/Script/LevelController.cs"

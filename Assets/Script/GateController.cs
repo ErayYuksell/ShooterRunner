@@ -42,13 +42,13 @@ public class GateController : MonoBehaviour
         switch (gateType)
         {
             case GateType.Power:
-                GateText.text = currentValue.ToString("F0");
+                GateText.text = currentValue.ToString("F0") + " Power";
                 break;
             case GateType.Range:
-                GateText.text = currentValue.ToString("F0");
+                GateText.text = currentValue.ToString("F0") + " Range";
                 break;
             case GateType.FireRate:
-                GateText.text = currentValue.ToString("F0");
+                GateText.text = currentValue.ToString("F0") + " FireRate";
                 break;
             default:
                 break;
