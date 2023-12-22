@@ -9,6 +9,7 @@ public class FinishController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var player = other.GetComponent<PlayerController>();
+            //player.playerSpawnModule.RemevoPlayer();
             player.finishGame.PlayerMove();
         }
     }

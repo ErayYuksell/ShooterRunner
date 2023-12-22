@@ -208,16 +208,19 @@ public class PlayerController : MonoBehaviour
         }
         public void PlayerBounce()
         {
+            //for (int i = 0; i < playerController.playerSpawnModule.playerList.Count; i++)
+            //{
             playerController.movementModule.SetCanMove(false);
             playerController.fireModule.SetCanFire(false);
 
-            playerController.transform.DOMove(playerController.transform.position - new Vector3(0, 0, 4), 0.5f).OnComplete(() =>
+            playerController/*.playerSpawnModule.playerList[i]*/.transform.DOMove(playerController.transform.position - new Vector3(0, 0, 4), 0.5f).OnComplete(() =>
             {
                 playerController.movementModule.SetCanMove(true);
                 playerController.fireModule.SetCanFire(true);
                 playerController.StartCoroutine();
 
             });
+            //}
         }
         public void PlayerDamage()
         {
@@ -283,7 +286,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerController playerController;
         [SerializeField] GameObject playerPrefab;
-        [SerializeField] Transform playerSpawnControllerPos;
+        public List<GameObject> playerList = new List<GameObject>();
         public void init(PlayerController playerController)
         {
             this.playerController = playerController;
@@ -293,13 +296,14 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < gateValue; i++)
             {
-                var player = Instantiate(playerPrefab, GetNewPlayerPosition(), Quaternion.identity,playerSpawnControllerPos);
+                var player = Instantiate(playerPrefab, GetNewPlayerPosition(), Quaternion.identity);
                 var newPlayerController = player.GetComponent<PlayerController>();
+
                 newPlayerController.movementModule.SetCanMove(true);
                 newPlayerController.fireModule.SetCanFire(true);
-                newPlayerController.movementModule.StartRunAnime();
-                PlayerSpawnController.instance.AddedList(player);
-                //playerList.Add(player);
+                newPlayerController.StartCoroutine();
+                //newPlayerController.movementModule.StartRunAnime(); bunu actigimda null hatasi veriyor 
+                playerList.Add(player);
             }
         }
         Vector3 GetNewPlayerPosition()
@@ -308,6 +312,15 @@ public class PlayerController : MonoBehaviour
             Vector3 playerPos = playerController.transform.position;
             return playerPos + pos;
         }
+        //public void RemevoPlayer()
+        //{
+        //    for (int i = 1; i <= playerList.Count; i++)
+        //    {
+        //        playerList.Remove(playerList[i]);
+        //        Destroy(playerList[i]);
+
+        //    }
+        //}
 
     }
 
