@@ -9,15 +9,14 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] GameObject bulletObject;
 
     Animator animator;
-    [SerializeField] LevelController levelController;
     public MovementModule movementModule;
     public FireModule fireModule;
     public GatePassModule gatePassModule;
     public DeathModule deathModule;
     public FinishGame finishGame;
+    public PlayerSpawnModule playerSpawnModule;
     bool isAlive = false;
 
     void Start()
@@ -27,6 +26,7 @@ public class PlayerController : MonoBehaviour
         gatePassModule.init(this);
         deathModule.init(this);
         finishGame.init(this);
+        playerSpawnModule.init(this);
 
         animator = GetComponent<Animator>();
     }
@@ -181,6 +181,9 @@ public class PlayerController : MonoBehaviour
                 case GateType.FireRate:
                     playerController.fireModule.bulletDuration -= currentValue * fireRateMultiply;
                     break;
+                case GateType.MultiplyPlayer:
+                    playerController.playerSpawnModule.PlayerSpawn(currentValue); ;
+                    break;
                 default:
                     break;
             }
@@ -275,6 +278,37 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    [Serializable]
+    public class PlayerSpawnModule
+    {
+        PlayerController playerController;
+        [SerializeField] GameObject playerPrefab;
+        [SerializeField] Transform playerSpawnControllerPos;
+        public void init(PlayerController playerController)
+        {
+            this.playerController = playerController;
+        }
 
+        public void PlayerSpawn(float gateValue)
+        {
+            for (int i = 0; i < gateValue; i++)
+            {
+                var player = Instantiate(playerPrefab, GetNewPlayerPosition(), Quaternion.identity,playerSpawnControllerPos);
+                var newPlayerController = player.GetComponent<PlayerController>();
+                newPlayerController.movementModule.SetCanMove(true);
+                newPlayerController.fireModule.SetCanFire(true);
+                newPlayerController.movementModule.StartRunAnime();
+                PlayerSpawnController.instance.AddedList(player);
+                //playerList.Add(player);
+            }
+        }
+        Vector3 GetNewPlayerPosition()
+        {
+            Vector3 pos = UnityEngine.Random.insideUnitCircle * 0.1f;
+            Vector3 playerPos = playerController.transform.position;
+            return playerPos + pos;
+        }
+
+    }
 
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1007
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 99
+  controlID: 123
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 47
+  controlID: 19
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -272,8 +272,8 @@ MonoBehaviour:
     y: 0
     width: 367
     height: 957
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -299,9 +299,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 560
+    x: 565
     y: 73
-    width: 564
+    width: 559
     height: 936
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -319,14 +319,14 @@ MonoBehaviour:
     - {fileID: -6008232758320707183, guid: 7c42266b515711c46a65b3ee2ee7f3ac, type: 2}
     - {fileID: 6195142514855545459, guid: 161e1aceb4f00cb45902f6143853e9fc, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.79624844
+    - e00: 0.91568565
       e01: 0
       e02: 0
-      e03: 11.636174
+      e03: -4.618393
       e10: 0
-      e11: 0.79624844
+      e11: 0.91568565
       e12: 0
-      e13: 274.97174
+      e13: 257.4175
       e20: 0
       e21: 0
       e22: 1
@@ -522,21 +522,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: baddffff0efbffff80810000
+      m_ExpandedIDs: a88bfeff1a93feffa2a0feff4865ffff0efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: UnSuccessPanel
+        m_OriginalName: UnSuccessPanel
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -127084
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 7}
       m_SearchString: 
@@ -591,7 +591,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Prefab
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -599,16 +599,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Script
+  - Assets/Prefab
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\erayy\OneDrive\Desktop\Unity Game\ShooterRunner
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9c5e0000
-    m_LastClickedID: 24220
-    m_ExpandedIDs: 000000007e5e0000805e0000825e0000845e0000
+    m_SelectedIDs: 965e0000
+    m_LastClickedID: 24214
+    m_ExpandedIDs: 000000007e5e0000805e0000825e0000845e00008c5e00006e90000072900000769000007a900000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -667,18 +667,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000b4630000e0750000d87500001e620000ee61000072620000fe6a00009c6a00004e6c0000000000009a79000092790000ec820000b2750000067e0000fcc7000006990000f2980000ee980000f6980000fa98000002990000e6980000ea980000e2980000bca90000f6a900009edf000022df00005edc0000f2e100009ede00006e6c000002760000067600000a7600001e760000167600009e74000002a8000008f600002af600002ef60000c8d100002a8b0000c2520100b2360300b6360300a6ff0100a6010200142f0100983d01009c580100a4580100546001005c600100907500008475000080750000887500008c750000867500008a750000786d00007a6d00009cbc000020d900000cd9000008d9000024d9000000d9000028d90000a29c0000b29c0000f2b60000d8b60000feb60000f6b60000e6b60000e6130100de130100c2130100ce130100ca130100c6130100d8cb0000d2cb0000cacb0000cecb000068ef000026f000002cf00000966e0000ce0f010012280100222801004c280100ec4501003a4d01002af90000804f0100844f0100e0630100e4730000867e00007071000016f20000606e000076590000f0350100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: SM_fence_stand_small
+      m_OriginalName: SM_fence_stand_small
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 37224
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 8}
     m_CreateAssetUtility:
@@ -1108,9 +1108,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.27739716, y: -0.19481301, z: 92.824356}
+    m_Target: {x: -0.38724893, y: 2.4198773, z: -0.903414}
     speed: 2
-    m_Value: {x: 0.27739716, y: -0.19481301, z: 92.824356}
+    m_Value: {x: -0.38724893, y: 2.4198773, z: -0.903414}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1156,13 +1156,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.29653016, y: 0.050965015, z: -0.01584899, w: 0.9535332}
+    m_Target: {x: 0.2588235, y: 0.06947343, z: -0.018667568, w: 0.9632425}
     speed: 2
-    m_Value: {x: 0.29652953, y: 0.050964907, z: -0.015848957, w: 0.95353115}
+    m_Value: {x: 0.25882342, y: 0.06947341, z: -0.01866756, w: 0.9632421}
   m_Size:
-    m_Target: 6.7151866
+    m_Target: 3.6281152
     speed: 2
-    m_Value: 6.7151866
+    m_Value: 3.6281152
   m_Ortho:
     m_Target: 0
     speed: 2

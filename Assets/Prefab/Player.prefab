@@ -2508,7 +2508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletObject: {fileID: 6754568178419011858, guid: 0fe3e838475d14243b969fe99f0b5633, type: 3}
-  levelController: {fileID: 0}
+  levelController: {fileID: 4716731014247079148, guid: 7ecb2e39fc08a1a4f8fd6d451e9653d3, type: 3}
   movementModule:
     playerSpeed: 5
   fireModule:
@@ -2527,6 +2527,9 @@ MonoBehaviour:
     playerStopPosition: {fileID: 0}
     bombSpawnPoint: {fileID: 2756286843538865204}
     bombPrefab: {fileID: 1714712776169391802, guid: 08e97a8dd6a8ba84a9e53926e4aa5120, type: 3}
+    bombAmount: 0
+  playerSpawnModule:
+    playerPrefab: {fileID: 8436524387109579245}
 --- !u!54 &464012475163351445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2549,10 +2552,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5080587269211607374
 CapsuleCollider:
@@ -2561,7 +2564,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8436524387109579245}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2aacf34d381c593478d98efbf332940d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

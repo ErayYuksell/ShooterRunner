@@ -370,6 +370,7 @@
 "Assets/Script/LevelController.cs"
 "Assets/Script/ObjectPool.cs"
 "Assets/Script/PlayerController.cs"
+"Assets/Script/PlayerSpawnController.cs"
 "Assets/Script/TargetController.cs"
 -langversion:9.0
 

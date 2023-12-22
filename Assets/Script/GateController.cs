@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum GateType { Power, Range, FireRate }
+public enum GateType { Power, Range, FireRate, MultiplyPlayer }
 public class GateController : MonoBehaviour
 {
 
@@ -50,6 +50,9 @@ public class GateController : MonoBehaviour
             case GateType.FireRate:
                 GateText.text = currentValue.ToString("F0") + " FireRate";
                 break;
+            case GateType.MultiplyPlayer:
+                GateText.text = currentValue.ToString("F0") + "x People";
+                break;
             default:
                 break;
         }
@@ -74,14 +77,14 @@ public class GateController : MonoBehaviour
             gameObject.GetComponent<BoxCollider>().enabled = false;
             gateObjects.Remove(gameObject);
             StartCoroutine(GateColliderClose());
-            
+
             var player = other.GetComponent<PlayerController>();
             player.gatePassModule.GatePassed(gateType, currentValue);
 
-            animator.SetTrigger("IsDead");
+            animator.SetTrigger("IsDead"); // ??
         }
     }
-    IEnumerator  GateColliderClose()
+    IEnumerator GateColliderClose()
     {
 
         // bir gate degdikten sonra tum gatelerin colliderlarini kapatariz belli bir sure sonra geri acariz boylece 2 gate den gecemez 
@@ -98,7 +101,7 @@ public class GateController : MonoBehaviour
             gate.GetComponent<Collider>().enabled = true;
         }
     }
-    
+
     public void GateIncreaseValue(float value)
     {
         currentValue += value;
